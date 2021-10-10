@@ -1,0 +1,22 @@
+{
+  "name": "git-test",
+  "version": "1.0.0",
+  "description": "This is a file made to learn webDev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SabariGanesh-K/gitLearning.git"
+  },
+  "author": "Sabari Ganesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SabariGanesh-K/gitLearning/issues"
+  },
+  "homepage": "https://github.com/SabariGanesh-K/gitLearning#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
