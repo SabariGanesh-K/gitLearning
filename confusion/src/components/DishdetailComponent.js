@@ -9,8 +9,8 @@ import {
   CardTitle,
 } from "reactstrap";
 
-class DishDetail extends Component {
-  renderDish(dish) {
+
+  function RenderDish({dish}) {
     if (dish != null)
       return (
         <Card>
@@ -24,12 +24,12 @@ class DishDetail extends Component {
     else return <div></div>;
   }
 
-  renderComments(selectedDish) {
+  function RenderComments({selectedDish,dishes}) {
     const rendered = false;
     if (selectedDish != null) {
       return (
         <h4>Comments</h4> &&
-        this.props.dishes.map(
+        dishes.map(
           (dish) =>
             selectedDish.id == dish.id &&
             dish.comments.map((review) => {
@@ -38,7 +38,7 @@ class DishDetail extends Component {
                 <Card>
                   <ul class="list-group">
                     <li class="list-group-item">
-                      {review.comment} <br /> --{review.author} , {review.date}
+                      {review.comment} <br /> --{review.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(review.date)))}
                     </li>
                   </ul>
                 </Card>
@@ -48,20 +48,23 @@ class DishDetail extends Component {
       );
     } else return <div></div>;
   }
-  render() {
+  
+  const DishDetail = (props)=>{
     return (
       <div className="row">
         <div className="col-12 col-md-5 m-1">
-          {this.renderDish(this.props.selectedDish)}
+         
+          <RenderDish dish = {props.selectedDish}/>
         </div>
 
         <div className="col-12 col-md-5 m-1">
           <h4>Comments</h4>
-          {this.renderComments(this.props.selectedDish)}
+         
+          <RenderComments selectedDish = {props.selectedDish} dishes = {props.dishes} />
           {console.log("Done2")}
         </div>
       </div>
     );
-  }
-}
+ }
+
 export default DishDetail;
