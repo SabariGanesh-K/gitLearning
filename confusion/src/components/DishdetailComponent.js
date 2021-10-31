@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { Card, CardImg, CardImgOverlay,
-  CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+  CardTitle, Breadcrumb, BreadcrumbItem ,CardBody,CardText} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
