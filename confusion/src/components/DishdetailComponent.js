@@ -1,13 +1,21 @@
 import React, { Component } from "react";
+import CommentForm from "./CommentForm";
+import {
+  Card,
+  CardImg,
+  CardImgOverlay,
+  CardTitle,
+  Breadcrumb,
+  BreadcrumbItem,
+  CardBody,
+  CardText,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
-import { Card, CardImg, CardImgOverlay,
-  CardTitle, Breadcrumb, BreadcrumbItem ,CardBody,CardText} from 'reactstrap';
-import { Link } from 'react-router-dom';
 
-
-function RenderDish({ dish }) {
-  if (dish != null){
-    console.log("Render dish taken")
+function RenderDish(dish) {
+  if (dish != null) {
+    console.log("Render dish taken");
     return (
       <Card>
         <CardImg top src={dish.image} alt={dish.name} />
@@ -16,60 +24,40 @@ function RenderDish({ dish }) {
           <CardText>{dish.description}</CardText>
         </CardBody>
       </Card>
-    );}
-  else{ return <div></div>};
+    );
+  } else {
+    return <div></div>;
+  }
 }
 
-function RenderComments({ comments }) {
-  
-  comments.map((review) => {
-    console.log(review);
-    console.log(review.id);
-    return(
+function RenderComments(comments) {
+   
+    // console.log(review)
+    console.log("Comment taken")
+   const output =  comments.map((review)=>{
+    return (
+     
       <Card>
-        <ul class="list-group">
-          <li class="list-group-item">
-            {review.comment} <br/> --{review.author} ,{" "}
-            {new Intl.DateTimeFormat("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "2-digit",
-            }).format(new Date(Date.parse(review.date)))}
+        <ul className="list-group">
+          <li className="list-group-item">
+            {review.comment} <br /> --{review.author} ,{" "}
+            {review.date}
           </li>
         </ul>
       </Card>
-    );
-  } )}
+    )})
+    return (
+      <div>
+        {output}
+      </div>
+    )
 
-  // if (selectedDish != null) {
-  //   return (
-  //     <h4>Comments</h4> &&
-  //     dishes.map(
-  //       (dish) =>
-  //         selectedDish.id == dish.id &&
-  //         dish.comments.map((review) => {
-  //           console.log("success");
-  //           return (
-  //             <Card>
-  //               <ul class="list-group">
-  //                 <li class="list-group-item">
-  //                   {review.comment} <br /> --{review.author} ,{" "}
-  //                   {new Intl.DateTimeFormat("en-US", {
-  //                     year: "numeric",
-  //                     month: "short",
-  //                     day: "2-digit",
-  //                   }).format(new Date(Date.parse(review.date)))}
-  //                 </li>
-  //               </ul>
-  //             </Card>
-  //           );
-  //         })
-  //     )
-  //   );
-  // } else return <div></div>;
+  
+}
 
 
-const DishDetail = (props) => {
+
+const  DishDetail = (props)=> {
   return (
     <div className="container">
       <div className="row">
@@ -86,17 +74,15 @@ const DishDetail = (props) => {
       </div>
       <div className="row">
         <div className="col-12 col-md-5 m-1">
-          <RenderDish selectedDish={props.selectedDish} />
+          {RenderDish(props.selectedDish)}
         </div>
 
         <div className="col-12 col-md-5 m-1">
           <h4>Comments</h4>
 
-          <RenderComments
-          comments = {props.comments}
-            selectedDish={props.selectedDish}
-            dishes={props.dishes}
-          />
+          {RenderComments(props.comments)}
+
+          <CommentForm />
           {console.log("Done2")}
         </div>
       </div>

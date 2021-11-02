@@ -12,7 +12,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-function RenderMenu({ dish, onClick }) {
+function RenderMenu({ dish}) {
   return (
     <Card >
       <Link to={`/menu/${dish.id}`}>
@@ -23,7 +23,7 @@ function RenderMenu({ dish, onClick }) {
       </Link>
     </Card>
   );
-}
+};
 
 const Menu = (props) => {
   const menu = props.dishes.map((dish) => {
