@@ -36,8 +36,9 @@ class CommentForm extends Component {
     this.setState({ isCommentFormOpen: !this.state.isCommentFormOpen });
   }
   onCommentSubmit(values) {
+    this.toggleCommentForm()
     console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    this.props.addComment(this.props.dishId,values.rating,values.name,values.comment)
   }
   render() {
     return (
@@ -75,7 +76,7 @@ class CommentForm extends Component {
               </Row>
 
               <Row className="form-group">
-                <Label For="name" md={2}>
+                <Label htmlFor="name" md={2}>
                   Your name
                 </Label>
                 <Col md={10}>
@@ -194,8 +195,9 @@ const DishDetail = (props) => {
 
           {RenderComments(props.comments)}
 
-          <CommentForm />
+          <CommentForm   dishId={props.selectedDish.id} addComment = {props.addComment} />
           {console.log("Done2")}
+          {console.log(props.dishId)}
         </div>
       </div>
     </div>
