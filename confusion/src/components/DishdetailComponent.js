@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Loading } from "./loadingComponent";
 import {
   Card,
   CardImg,
@@ -171,6 +171,28 @@ function RenderComments(comments) {
 }
 
 const DishDetail = (props) => {
+
+  if (props.isLoading){
+      return (
+        <div className = "container">
+          <div className = "row">
+            <Loading />
+          </div>
+        </div>
+      )
+  }
+
+  else if (props.errMess) {
+    return(
+      <div className = "container">
+        <div className = "row">
+          <h4>{props.errMess}</h4>
+        </div>
+      </div>
+    )
+  }
+
+  else{
   return (
     <div className="container">
       <div className="row">
@@ -202,6 +224,7 @@ const DishDetail = (props) => {
       </div>
     </div>
   );
+  }
 };
 
 export default DishDetail;

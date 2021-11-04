@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Loading } from "./loadingComponent";
 import {
   Card,
   CardImg,
@@ -26,7 +26,7 @@ function RenderMenu({ dish}) {
 };
 
 const Menu = (props) => {
-  const menu = props.dishes.map((dish) => {
+  const menu = props.dishes.dishes.map((dish) => {
     return (
       <div key={dish.id} className="col-12 col-md-5 m-1">
         <RenderMenu dish={dish} />
@@ -34,6 +34,22 @@ const Menu = (props) => {
     );
   });
 
+  if (props.dishes.isLoading){
+    return (
+      <Loading/>
+    )
+  }
+  else if (props.dishes.errMess){
+    return (
+      <div className = "container">
+        <div className = "row">
+          <h4> {props.dishes.errMess} </h4>
+        </div>
+      </div>
+    )
+  }
+
+  else{
   return (
     <div className="container">
       <div className="row">
@@ -48,6 +64,7 @@ const Menu = (props) => {
       <div className="row">{menu}</div>
     </div>
   );
+  }
 };
 
 export default Menu;
