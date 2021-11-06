@@ -39,7 +39,7 @@ class CommentForm extends Component {
   onCommentSubmit(values) {
     this.toggleCommentForm()
     console.log("Current State is: " + JSON.stringify(values));
-    this.props.addComment(this.props.dishId,values.rating,values.name,values.comment)
+    this.props.postComment(this.props.dishId,values.rating,values.name,values.comment)
   }
   render() {
     return (
@@ -218,7 +218,7 @@ const DishDetail = (props) => {
 
           {RenderComments(props.comments)}
 
-          <CommentForm   dishId={props.selectedDish.id} addComment = {props.addComment} />
+          <CommentForm   dishId={props.selectedDish.id} postComment = {props.postComment} />
           {console.log("Done2")}
           {console.log(props.dishId)}
         </div>
