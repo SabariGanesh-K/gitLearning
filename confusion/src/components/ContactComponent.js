@@ -8,11 +8,11 @@ import {
   Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, Form, Errors,actions } from "react-redux-form";
+import { Control, Form, Errors, actions } from "react-redux-form";
 
 const required = (val) => val && val.length;
-const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) => (val) && (val.length >= len);
+const maxLength = (len) => (val) => !val || val.length <= len;
+const minLength = (len) => (val) => val && val.length >= len;
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
@@ -20,29 +20,23 @@ const validEmail = (val) =>
 class Contact extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   firstname: "",
-    //   lastname: "",
-    //   telnum: "",
-    //   email: "",
-    //   agree: false,
-    //   contactType: "Tel.",
-    //   message: "",
-    //   touched: {
-    //     firstname: false,
-    //     lastname: false,
-    //     telnum: false,
-    //     email: false,
-    //   },
-    // };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(values) {
+    this.props.postFeedback(
+      values.firstname,
+      values.lastname,
+      values.telnum,
+      values.email,
+      values.agreed,
+      values.contactType,
+      values.message
+    );
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
-    this.props.resetFeedbackForm()
+    this.props.resetFeedbackForm();
   }
 
   render() {
@@ -112,7 +106,10 @@ class Contact extends Component {
           </div>
 
           <div className="col-12 col-md-9">
-            <Form model = "feedback" onSubmit={(values) => this.handleSubmit(values)}>
+            <Form
+              model="feedback"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
               <Row className="form-group">
                 <Label for="firstname" md={2}>
                   First Name
